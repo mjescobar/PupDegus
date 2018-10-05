@@ -51,8 +51,8 @@ function interfaz_grafica_OpeningFcn(hObject, eventdata, handles, varargin)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 % varargin   command line arguments to interfaz_grafica (see VARARGIN)
-handles.nframes = 100; %N∞ de frames por default
-handles.check = 0; %Para graficar im·genes aleatorias
+handles.nframes = 100; %N¬∞ de frames por default
+handles.check = 0; %Para graficar im√°genes aleatorias
 handles.thresholdU = 30;
 handles.thresholdD = 30;
 handles.thresholdL = 30;
@@ -96,7 +96,7 @@ vid=VideoReader(file); %Datos del video
 %------------Convertimos los frames en .jpg----------------
 %(Los .jpg los ponemos en una subcarpeta)
 filefram=strcat(PathName,FileName(1:end-4),'_frames'); %String con nombre carpeta (+ path)
-mkdir(filefram); %Creamos la carpeta y si ya existe da seÒal de warning
+mkdir(filefram); %Creamos la carpeta y si ya existe da se√±al de warning
 fileframes=strcat(filefram, '\'); %String con nombre carpeta (+ path) + '\'
 %numFrames = vid.NumberOfFrames; %Obtiene el total de frames del video
 n = handles.nframes; %Default 100 frames
@@ -105,7 +105,7 @@ for i = 1:n
   imwrite(frames,[fileframes, int2str(i), '.jpg']);
 end 
 
-%Leemos las im·genes
+%Leemos las im√°genes
 file=[fileframes, '1', '.jpg']; %Nombre de la primera imagen
 imagen=imread(file); %Leemos la primera imagen
 imagen=rgb2gray(imagen); %Convertimos a escala de grises
@@ -146,18 +146,18 @@ linea_vertical
 plot(VERTICAL_LINE(:,2), VERTICAL_LINE(:,1),'b'); 
 plot(HORIZONTAL_LINE(:,2), HORIZONTAL_LINE(:,1),'b');
 
-%C·lculo de la elipse que delimita la zona interior y exterior 
+%C√°lculo de la elipse que delimita la zona interior y exterior 
 ellipse_center = [int16(HORIZONTAL_LINE(int16(HORIZONTAL_LENGTH/2),2)),int16(VERTICAL_LINE(int16(VERTICAL_LENGTH/2),1))];
 ellipse_x = HORIZONTAL_LENGTH/2;
 ellipse_y = VERTICAL_LENGTH/2;
 area_ellipse = pi*ellipse_x*ellipse_y;
 elipse_prueba
 
-%Calculamos el ·rea total de la primera imagen
+%Calculamos el √°rea total de la primera imagen
 lineas
 calculo_area
 
-%Creamos el vector que contiene las ·reas de cada imagen
+%Creamos el vector que contiene las √°reas de cada imagen
 AREAS=zeros(n,1);
 AREAS_ELLIPSE=zeros(n,1);
 AREAS_ELLIPSE_PRUEBA=zeros(n,1);
@@ -167,7 +167,7 @@ AREAS_ELLIPSE_PRUEBA(1)=area_ellipse_prueba;
 n_plot = 1;
 
 for j=2:n
-   %Leemos las siguientes im·genes
+   %Leemos las siguientes im√°genes
    file=[fileframes, int2str(j), '.jpg'];
    imagen=imread(file);
    imagen=rgb2gray(imagen);
@@ -205,18 +205,18 @@ for j=2:n
        plot(HORIZONTAL_LINE(:,2), HORIZONTAL_LINE(:,1),'b');
    end
 
-   %C·lculo de la elipse que delimita la zona interior y exterior 
+   %C√°lculo de la elipse que delimita la zona interior y exterior 
    ellipse_center = [int16(HORIZONTAL_LINE(int16(HORIZONTAL_LENGTH/2),2)),int16(VERTICAL_LINE(int16(VERTICAL_LENGTH/2),1))];
    ellipse_x = HORIZONTAL_LENGTH/2;
    ellipse_y = VERTICAL_LENGTH/2;
    area_ellipse = pi*ellipse_x*ellipse_y;
    elipse_prueba
 
-   %Calculamos el ·rea total de la primera imagen
+   %Calculamos el √°rea total de la primera imagen
    lineas
    calculo_area
    
-   %Agregamos las dem·s ·reas a los vectores AREAS
+   %Agregamos las dem√°s √°reas a los vectores AREAS
    AREAS(j)=area_total;
    AREAS_ELLIPSE(j)=area_ellipse;
    AREAS_ELLIPSE_PRUEBA(j)=area_ellipse_prueba;
@@ -448,38 +448,38 @@ function graficos_areas_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-%Graficamos las ·reas
+%Graficamos las √°reas
 fileframes = handles.fileframes;
 AREAS = handles.areas;
 AREAS_ELLIPSE = handles.areas_ellipse;
 frames=1:handles.nframes;
 subplot(2,2,1)
 plot(frames,AREAS);
-title('¡reas en [px^2]')
+title('√Åreas en [px^2]')
 xlabel('Frames')
-ylabel('¡rea [px^2]')
-%saveas(gcf,'D:\Pr·ctica 2018-1\BFFE_505_contra_Ejemplo arturo\areas.png')
+ylabel('√Årea [px^2]')
+%saveas(gcf,'D:\Pr√°ctica 2018-1\BFFE_505_contra_Ejemplo arturo\areas.png')
 saveas(gcf,[fileframes,'areas.png'])
 subplot(2,2,2)
 plot(frames,(AREAS/mean(AREAS(1:15)))*100);
-title('¡reas relativas')
+title('√Åreas relativas')
 xlabel('Frames')
-ylabel('¡rea relativa [%]')
+ylabel('√Årea relativa [%]')
 axis([0 frames(end) 0 120])
-%saveas(gcf,'D:\Pr·ctica 2018-1\BFFE_505_contra_Ejemplo arturo\areas_relativas.png')
+%saveas(gcf,'D:\Pr√°ctica 2018-1\BFFE_505_contra_Ejemplo arturo\areas_relativas.png')
 saveas(gcf,[fileframes,'areas_relativas.png'])
 subplot(2,2,3)
 plot(frames,AREAS_ELLIPSE);
-title('¡reas elipses en [px^2]')
+title('√Åreas elipses en [px^2]')
 xlabel('Frames')
-ylabel('¡rea elipse [px^2]')
-%saveas(gcf,'D:\Pr·ctica 2018-1\BFFE_505_contra_Ejemplo arturo\areas_elipses.png')
+ylabel('√Årea elipse [px^2]')
+%saveas(gcf,'D:\Pr√°ctica 2018-1\BFFE_505_contra_Ejemplo arturo\areas_elipses.png')
 saveas(gcf,[fileframes,'areas_elipses.png'])
 subplot(2,2,4)
 plot(frames,(AREAS_ELLIPSE/mean(AREAS_ELLIPSE(1:15)))*100);
-title('¡reas elipses relativas')
+title('√Åreas elipses relativas')
 xlabel('Frames')
-ylabel('¡rea elipse relativa [%]')
+ylabel('√Årea elipse relativa [%]')
 axis([0 frames(end) 0 120])
-%saveas(gcf,'D:\Pr·ctica 2018-1\BFFE_505_contra_Ejemplo arturo\areas_elipses_relativas.png')
+%saveas(gcf,'D:\Pr√°ctica 2018-1\BFFE_505_contra_Ejemplo arturo\areas_elipses_relativas.png')
 saveas(gcf,[fileframes,'areas_elipses_relativas.png'])
