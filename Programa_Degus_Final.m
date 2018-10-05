@@ -6,7 +6,7 @@ vid=VideoReader(file);
 %-------Convierte los frames en *jpg--------------------------------------------------
 %los *jpg los pone en una subcarpeta
 filefram=strcat(PathName,FileName(1:end-4),'_frames');
-%crea la carpeta y si ya existe  da señal de warning
+%crea la carpeta y si ya existe  da seÃ±al de warning
 mkdir(filefram);
 
 %------y pone los jpg dentro numerados de 1 al numFrames------------------------------ 
@@ -20,10 +20,10 @@ end
 
 clear all;
 
-%Elegimos las imágenes
+%Elegimos las imÃ¡genes
 [FileName,PathName] = uigetfile('*.jpg','Select the image file', 'MultiSelect', 'on');
 
-%Leímos las imágenes
+%LeÃ­mos las imÃ¡genes
 file=strcat(PathName, FileName{1});
 imagen=imread(file);
 imagen=rgb2gray(imagen);
@@ -64,18 +64,18 @@ linea_vertical
 plot(VERTICAL_LINE(:,2), VERTICAL_LINE(:,1),'b'); 
 plot(HORIZONTAL_LINE(:,2), HORIZONTAL_LINE(:,1),'b');
 
-%Cálculo de la elipse que delimita la zona interior y exterior 
+%CÃ¡lculo de la elipse que delimita la zona interior y exterior 
 ellipse_center = [int16(HORIZONTAL_LINE(int16(HORIZONTAL_LENGTH/2),2)),int16(VERTICAL_LINE(int16(VERTICAL_LENGTH/2),1))];
 ellipse_x = HORIZONTAL_LENGTH/2;
 ellipse_y = VERTICAL_LENGTH/2;
 area_ellipse = pi*ellipse_x*ellipse_y;
 elipse_prueba
 
-%Calculamos el área total de la primera imagen
+%Calculamos el Ã¡rea total de la primera imagen
 lineas
 calculo_area
 
-%Creamos el vector que contiene las áreas de cada imagen
+%Creamos el vector que contiene las Ã¡reas de cada imagen
 AREAS=zeros(length(FileName),1);
 AREAS_ELLIPSE=zeros(length(FileName),1);
 AREAS_ELLIPSE_PRUEBA=zeros(length(FileName),1);
@@ -86,7 +86,7 @@ AREAS_ELLIPSE_PRUEBA(1)=area_ellipse_prueba;
 
 
 for j=2:length(FileName)
-   %Leemos las siguientes imágenes
+   %Leemos las siguientes imÃ¡genes
    file=strcat(PathName, FileName{j});
    imagen=imread(file);
    imagen=rgb2gray(imagen);
@@ -120,48 +120,48 @@ for j=2:length(FileName)
        plot(HORIZONTAL_LINE(:,2), HORIZONTAL_LINE(:,1),'b');
    end
 
-   %Cálculo de la elipse que delimita la zona interior y exterior 
+   %CÃ¡lculo de la elipse que delimita la zona interior y exterior 
    ellipse_center = [int16(HORIZONTAL_LINE(int16(HORIZONTAL_LENGTH/2),2)),int16(VERTICAL_LINE(int16(VERTICAL_LENGTH/2),1))];
    ellipse_x = HORIZONTAL_LENGTH/2;
    ellipse_y = VERTICAL_LENGTH/2;
    area_ellipse = pi*ellipse_x*ellipse_y;
    elipse_prueba
 
-   %Calculamos el área total de la primera imagen
+   %Calculamos el Ã¡rea total de la primera imagen
    lineas
    calculo_area
    
-   %Agregamos las demás áreas a los vectores AREAS
+   %Agregamos las demÃ¡s Ã¡reas a los vectores AREAS
    AREAS(j)=area_total;
    AREAS_ELLIPSE(j)=area_ellipse;
    AREAS_ELLIPSE_PRUEBA(j)=area_ellipse_prueba;
 end
 
-%Graficamos las áreas
+%Graficamos las Ã¡reas
 frames=1:length(FileName);
 figure
 plot(frames,AREAS);
-title('Áreas en [px^2]')
+title('Ãreas en [px^2]')
 xlabel('Frames')
-ylabel('Área [px^2]')
-saveas(gcf,'D:\Práctica 2018-1\BFFE_505_contra_Ejemplo arturo\areas.png')
+ylabel('Ãrea [px^2]')
+saveas(gcf,'D:\PrÃ¡ctica 2018-1\BFFE_505_contra_Ejemplo arturo\areas.png')
 figure
 plot(frames,(AREAS/mean(AREAS(1:15)))*100);
-title('Áreas relativas')
+title('Ãreas relativas')
 xlabel('Frames')
-ylabel('Área relativa [%]')
+ylabel('Ãrea relativa [%]')
 axis([0 frames(end) 0 120])
-saveas(gcf,'D:\Práctica 2018-1\BFFE_505_contra_Ejemplo arturo\areas_relativas.png')
+saveas(gcf,'D:\PrÃ¡ctica 2018-1\BFFE_505_contra_Ejemplo arturo\areas_relativas.png')
 figure
 plot(frames,AREAS_ELLIPSE);
-title('Áreas elipses en [px^2]')
+title('Ãreas elipses en [px^2]')
 xlabel('Frames')
-ylabel('Área elipse [px^2]')
-saveas(gcf,'D:\Práctica 2018-1\BFFE_505_contra_Ejemplo arturo\areas_elipses.png')
+ylabel('Ãrea elipse [px^2]')
+saveas(gcf,'D:\PrÃ¡ctica 2018-1\BFFE_505_contra_Ejemplo arturo\areas_elipses.png')
 figure
 plot(frames,(AREAS_ELLIPSE/mean(AREAS_ELLIPSE(1:15)))*100);
-title('Áreas elipses relativas')
+title('Ãreas elipses relativas')
 xlabel('Frames')
-ylabel('Área elipse relativa [%]')
+ylabel('Ãrea elipse relativa [%]')
 axis([0 frames(end) 0 120])
-saveas(gcf,'D:\Práctica 2018-1\BFFE_505_contra_Ejemplo arturo\areas_elipses_relativas.png')
+saveas(gcf,'D:\PrÃ¡ctica 2018-1\BFFE_505_contra_Ejemplo arturo\areas_elipses_relativas.png')
